@@ -1,38 +1,8 @@
 #import "RNIsDeviceRooted.h"
-#import "UIDevice+PasscodeStatus.h"
 
 @implementation RNIsDeviceRooted
 
 RCT_EXPORT_MODULE(RNIsDeviceRooted);
-
-RCT_REMAP_METHOD(isDeviceLocked,
-                 lockresolver:(RCTPromiseResolveBlock)resolve
-                 rejecter:(RCTPromiseRejectBlock)reject)
-{
-    
-    @try{
-        LNPasscodeStatus status = [UIDevice currentDevice].passcodeStatus;
-        switch (status) {
-            case LNPasscodeStatusEnabled:
-                resolve(@true);
-                break;
-                
-            case LNPasscodeStatusDisabled:
-                resolve(@false);
-                break;
-                
-            case LNPasscodeStatusUnknown:
-            default:
-                resolve(@false);
-                break;
-        }
-        
-    } @catch (NSException *exception)
-    {
-        reject(@"error", @"error retrieving password status", exception);
-    }
-    
-}
 
 RCT_REMAP_METHOD(isDeviceRooted,
                  rootresolver:(RCTPromiseResolveBlock)resolve
