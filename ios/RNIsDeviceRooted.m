@@ -1,4 +1,5 @@
 #import "RNIsDeviceRooted.h"
+#import "UIKit/UIKit.h"
 
 @implementation RNIsDeviceRooted
     
